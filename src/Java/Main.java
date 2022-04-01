@@ -24,6 +24,8 @@ public class Main {
             System.out.println("Move using 'w'(up), 'a'(left), 's'(down), 'd'(right) and press enter ");
             input = getInput(scanner);
             land.moveHuman(input);
+            land.moveGoblins();
+            land.spawnGoblins();
         }
     }
 

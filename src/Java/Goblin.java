@@ -1,4 +1,7 @@
 public class Goblin {
+    final String TEXT_GREEN = "\u001B[32m";
+    final String TEXT_RESET = "\u001B[0m";
+
     private int strength;
     private int health;
     private int hPos;
@@ -28,11 +31,16 @@ public class Goblin {
         this.hPos = hPos;
     }
 
-    public int getvPos() {
+    public int getVPos() {
         return vPos;
     }
 
-    public void setvPos(int vPos) {
+    public void setVPos(int vPos) {
         this.vPos = vPos;
+    }
+
+    @Override
+    public String toString() {
+        return TEXT_GREEN + "G" + TEXT_RESET;
     }
 }

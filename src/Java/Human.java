@@ -1,5 +1,4 @@
 public class Human {
-
     private int strength;
     private int health;
     private int hPos;
@@ -40,6 +39,9 @@ public class Human {
 
     @Override
     public String toString() {
-        return "H";
+        String TEXT_RESET = "\u001B[0m";
+        String TEXT_BLUE = "\u001B[34m";
+
+        return TEXT_BLUE + "H" + TEXT_RESET;
     }
 }
