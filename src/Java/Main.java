@@ -6,7 +6,6 @@ public class Main {
         final String TEXT_GREEN = "\u001B[32m";
         final String TEXT_RESET = "\u001B[0m";
         Human human = new Human();
-        Goblin goblin = new Goblin();
         Land land = new Land(30, 10, human);
         Scanner scanner = new Scanner(System.in);
         boolean playing = true;

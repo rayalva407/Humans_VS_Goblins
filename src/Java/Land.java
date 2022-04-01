@@ -4,14 +4,13 @@ import java.util.Random;
 
 public class Land {
     final String LEFT_MARGIN = "                                                                    ";
-    final String TEXT_BLUE = "\u001B[34m";
     final String TEXT_RESET = "\u001B[0m";
     final String TEXT_RED = "\u001B[31m";
     int length;
     int height;
     Random random = new Random();
 
-    char[][] gameGrid;
+    Object[][] gameGrid;
     ArrayList<Goblin> goblins = new ArrayList<>();
     Human human;
 
@@ -21,9 +20,9 @@ public class Land {
         this.height = height;
         this.human = human;
 
-        gameGrid = new char[height][length];
+        gameGrid = new Object[height][length];
 
-        for (char[] row : gameGrid) {
+        for (Object[] row : gameGrid) {
             Arrays.fill(row, '-');
         }
     }
@@ -32,6 +31,7 @@ public class Land {
     public void spawnHuman() {
         human.setVPos(this.height - 1);
         human.setHPos(random.nextInt(this.length));
+        gameGrid[human.getVPos()][human.getHPos()] = human.toString().charAt(0);
     }
 
     //Moves human to a different position
@@ -42,7 +42,9 @@ public class Land {
                 if (human.getVPos() == 0) {
                     System.out.println(message);
                 } else {
+                    gameGrid[human.getVPos()][human.getHPos()] = '-';
                     human.setVPos(human.getVPos() - 1);
+                    gameGrid[human.getVPos()][human.getHPos()] = human;
                 }
                 break;
             case 'a':
@@ -50,7 +52,9 @@ public class Land {
                     System.out.println(message);
                 }
                 else {
+                    gameGrid[human.getVPos()][human.getHPos()] = '-';
                     human.setHPos(human.getHPos() - 1);
+                    gameGrid[human.getVPos()][human.getHPos()] = human;
                 }
                 break;
             case 's':
@@ -58,7 +62,9 @@ public class Land {
                     System.out.println(message);
                 }
                 else {
+                    gameGrid[human.getVPos()][human.getHPos()] = '-';
                     human.setVPos(human.getVPos() + 1);
+                    gameGrid[human.getVPos()][human.getHPos()] = human;
                 }
                 break;
             case 'd':
@@ -66,7 +72,9 @@ public class Land {
                     System.out.println(message);
                 }
                 else {
+                    gameGrid[human.getVPos()][human.getHPos()] = '-';
                     human.setHPos(human.getHPos() + 1);
+                    gameGrid[human.getVPos()][human.getHPos()] = human;
                 }
                 break;
             default:
@@ -74,19 +82,20 @@ public class Land {
         }
     }
 
+    public void spawnGoblin() {
+
+    }
+
+
+
     @Override
     public String toString() {
         StringBuilder landStr = new StringBuilder();
 
-        for (int i = 0; i < gameGrid.length; i++) {
+        for (Object[] objects : gameGrid) {
             landStr.append(LEFT_MARGIN);
-            for (int j = 0; j < gameGrid[i].length; j++) {
-                if(i == human.getVPos() && j == human.getHPos()) {
-                    landStr.append(TEXT_BLUE).append(human.toString()).append(TEXT_RESET);
-                }
-                else {
-                    landStr.append(gameGrid[i][j]);
-                }
+            for (Object object : objects) {
+                landStr.append(object);
             }
             landStr.append("\n");
         }
