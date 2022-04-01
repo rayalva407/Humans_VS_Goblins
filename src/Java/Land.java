@@ -6,6 +6,7 @@ public class Land {
     final String LEFT_MARGIN = "                                                                    ";
     final String TEXT_BLUE = "\u001B[34m";
     final String TEXT_RESET = "\u001B[0m";
+    final String TEXT_RED = "\u001B[31m";
     int length;
     int height;
     Random random = new Random();
@@ -35,17 +36,18 @@ public class Land {
 
     //Moves human to a different position
     public void moveHuman(char input) {
+        String message = TEXT_RED + "There is no escape!" + TEXT_RESET;
         switch (input) {
             case 'w':
                 if (human.getVPos() == 0) {
-                    System.out.println("Out of bounds try going a different direction");
+                    System.out.println(message);
                 } else {
                     human.setVPos(human.getVPos() - 1);
                 }
                 break;
             case 'a':
                 if (human.getHPos() == 0) {
-                    System.out.println("Out of bounds try going a different direction");
+                    System.out.println(message);
                 }
                 else {
                     human.setHPos(human.getHPos() - 1);
@@ -53,7 +55,7 @@ public class Land {
                 break;
             case 's':
                 if (human.getVPos() == this.height - 1) {
-                    System.out.println("Out of bounds try going a different direction");
+                    System.out.println(message);
                 }
                 else {
                     human.setVPos(human.getVPos() + 1);
@@ -61,7 +63,7 @@ public class Land {
                 break;
             case 'd':
                 if (human.getHPos() == this.length - 1) {
-                    System.out.println("Out of bounds try going a different direction");
+                    System.out.println(message);
                 }
                 else {
                     human.setHPos(human.getHPos() + 1);
