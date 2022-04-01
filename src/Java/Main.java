@@ -9,8 +9,8 @@ public class Main {
         Goblin goblin = new Goblin();
         Land land = new Land(30, 10, human);
         Scanner scanner = new Scanner(System.in);
-        char input;
         boolean playing = true;
+        char input;
 
         //"Title Screen"
         System.out.println(TEXT_GREEN + "                                                                           Humans VS Goblins");
@@ -23,8 +23,21 @@ public class Main {
         while (playing) {
             System.out.println(land);
             System.out.println("Move using 'w'(up), 'a'(left), 's'(down), 'd'(right) and press enter ");
-            input = scanner.nextLine().charAt(0);
+            input = getInput(scanner);
             land.moveHuman(input);
+        }
+    }
+
+    //Gets input from the user if input is valid
+    private static char getInput(Scanner scanner) {
+        char input;
+        try {
+            input = scanner.nextLine().charAt(0);
+            return input;
+        }
+        catch (Exception e) {
+            System.out.println("Invalid input please try again!");
+            return getInput(scanner);
         }
     }
 }
