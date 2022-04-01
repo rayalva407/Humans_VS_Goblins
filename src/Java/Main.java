@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
         final String TEXT_RED = "\u001B[31m";
@@ -6,6 +8,9 @@ public class Main {
         Human human = new Human();
         Goblin goblin = new Goblin();
         Land land = new Land(30, 10, human);
+        Scanner scanner = new Scanner(System.in);
+        char input;
+        boolean playing = true;
 
         //"Title Screen"
         System.out.println(TEXT_GREEN + "                                                                           Humans VS Goblins");
@@ -15,9 +20,11 @@ public class Main {
 
 
         land.spawnHuman();
-        System.out.println(land);
-        System.out.println(human.getHPos());
-        System.out.println(human.getVPos());
-
+        while (playing) {
+            System.out.println(land);
+            System.out.println("Move using 'w'(up), 'a'(left), 's'(down), 'd'(right) and press enter ");
+            input = scanner.nextLine().charAt(0);
+            land.moveHuman(input);
+        }
     }
 }

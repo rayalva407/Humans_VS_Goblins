@@ -23,7 +23,7 @@ public class Land {
         gameGrid = new char[height][length];
 
         for (char[] row : gameGrid) {
-            Arrays.fill(row, '*');
+            Arrays.fill(row, '-');
         }
     }
 
@@ -31,6 +31,42 @@ public class Land {
     public void spawnHuman() {
         human.setVPos(this.height - 1);
         human.setHPos(random.nextInt(this.length));
+    }
+
+    //Moves human to a different position
+    public void moveHuman(char input) {
+        if (input == 'w') {
+            if (human.getVPos() == 0) {
+                System.out.println("Out of bounds try going a different direction");
+            }
+            else {
+                human.setVPos(human.getVPos() - 1);
+            }
+        }
+        if (input == 'a') {
+            if (human.getHPos() == 0) {
+                System.out.println("Out of bounds try going a different direction");
+            }
+            else {
+                human.setHPos(human.getHPos() - 1);
+            }
+        }
+        if (input == 's') {
+            if (human.getVPos() == this.height - 1) {
+                System.out.println("Out of bounds try going a different direction");
+            }
+            else {
+                human.setVPos(human.getVPos() + 1);
+            }
+        }
+        if (input == 'd') {
+            if (human.getHPos() == this.length - 1) {
+                System.out.println("Out of bounds try going a different direction");
+            }
+            else {
+                human.setHPos(human.getHPos() + 1);
+            }
+        }
     }
 
     @Override
