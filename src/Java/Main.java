@@ -26,6 +26,10 @@ public class Main {
             land.moveHuman(input);
             land.moveGoblins();
             land.spawnGoblins();
+            if (human.getHealth() <= 0) {
+                System.out.println("You are dead!");
+                playing = false;
+            }
         }
     }
 

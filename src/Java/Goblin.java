@@ -2,8 +2,8 @@ public class Goblin {
     final String TEXT_GREEN = "\u001B[32m";
     final String TEXT_RESET = "\u001B[0m";
 
-    private int strength;
-    private int health;
+    private int strength = 1;
+    private int health = 2;
     private int hPos;
     private int vPos;
 
@@ -42,5 +42,9 @@ public class Goblin {
     @Override
     public String toString() {
         return TEXT_GREEN + "G" + TEXT_RESET;
+    }
+
+    public void attack(Human human) {
+        human.setHealth(human.getHealth() - this.strength);
     }
 }

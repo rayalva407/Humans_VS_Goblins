@@ -1,6 +1,6 @@
 public class Human {
-    private int strength;
-    private int health;
+    private int strength = 1;
+    private int health = 5;
     private int hPos;
     private int vPos;
 
@@ -43,5 +43,9 @@ public class Human {
         String TEXT_BLUE = "\u001B[34m";
 
         return TEXT_BLUE + "H" + TEXT_RESET;
+    }
+
+    public void attack(Goblin goblin) {
+        goblin.setHealth(goblin.getHealth() - this.getStrength());
     }
 }

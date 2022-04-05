@@ -37,19 +37,61 @@ public class Land {
     //Moves human to a different position
     public void moveHuman(char input) {
         String message = TEXT_RED + "There is no escape!" + TEXT_RESET;
+        Object nextPosition;
+
         switch (input) {
             case 'w':
                 if (human.getVPos() == 0) {
                     System.out.println(message);
-                } else {
+                    break;
+                }
+                else {
+                    nextPosition = gameGrid[human.getVPos() - 1][human.getHPos()];
+                }
+
+                if (nextPosition.getClass().getName().equals("Goblin")) {
+                    Goblin goblin = (Goblin) nextPosition;
+                    if (Math.random() < 0.5) {
+                        human.attack(goblin);
+                        System.out.println("Human attacks goblin for" + human.getStrength() + "damage");
+                    } else {
+                        goblin.attack(human);
+                        System.out.println("Goblin attacks human for" + goblin.getStrength() + "damage");
+                    }
+                    if (goblin.getHealth() <= 0) {
+                        gameGrid[goblin.getVPos()][goblin.getHPos()] = '-';
+                        goblins.remove(goblin);
+                    }
+                }
+                else {
                     gameGrid[human.getVPos()][human.getHPos()] = '-';
                     human.setVPos(human.getVPos() - 1);
                     gameGrid[human.getVPos()][human.getHPos()] = human;
                 }
                 break;
             case 'a':
+
                 if (human.getHPos() == 0) {
                     System.out.println(message);
+                    break;
+                }
+                else {
+                    nextPosition = gameGrid[human.getVPos()][human.getHPos() - 1];
+                }
+
+                if (nextPosition.getClass().getName().equals("Goblin")) {
+                    Goblin goblin = (Goblin) nextPosition;
+                    if (Math.random() < 0.5) {
+                        human.attack(goblin);
+                        System.out.println("Human attacks goblin for" + human.getStrength() + "damage");
+                    } else {
+                        goblin.attack(human);
+                        System.out.println("Goblin attacks human for" + goblin.getStrength() + "damage");
+                    }
+                    if (goblin.getHealth() <= 0) {
+                        gameGrid[goblin.getVPos()][goblin.getHPos()] = '-';
+                        goblins.remove(goblin);
+                    }
                 }
                 else {
                     gameGrid[human.getVPos()][human.getHPos()] = '-';
@@ -60,6 +102,25 @@ public class Land {
             case 's':
                 if (human.getVPos() == this.height - 1) {
                     System.out.println(message);
+                    break;
+                }
+                else {
+                    nextPosition = gameGrid[human.getVPos() + 1][human.getHPos()];
+                }
+
+                if (nextPosition.getClass().getName().equals("Goblin")) {
+                    Goblin goblin = (Goblin) nextPosition;
+                    if (Math.random() < 0.5) {
+                        human.attack(goblin);
+                        System.out.println("Human attacks goblin for" + human.getStrength() + "damage");
+                    } else {
+                        goblin.attack(human);
+                        System.out.println("Goblin attacks human for" + goblin.getStrength() + "damage");
+                    }
+                    if (goblin.getHealth() <= 0) {
+                        gameGrid[goblin.getVPos()][goblin.getHPos()] = '-';
+                        goblins.remove(goblin);
+                    }
                 }
                 else {
                     gameGrid[human.getVPos()][human.getHPos()] = '-';
@@ -70,6 +131,25 @@ public class Land {
             case 'd':
                 if (human.getHPos() == this.length - 1) {
                     System.out.println(message);
+                    break;
+                }
+                else {
+                    nextPosition = gameGrid[human.getVPos()][human.getHPos() + 1];
+                }
+
+                if (nextPosition.getClass().getName().equals("Goblin")) {
+                    Goblin goblin = (Goblin) nextPosition;
+                    if (Math.random() < 0.5) {
+                        human.attack(goblin);
+                        System.out.println("Human attacks goblin for" + human.getStrength() + "damage");
+                    } else {
+                        goblin.attack(human);
+                        System.out.println("Goblin attacks human for" + goblin.getStrength() + "damage");
+                    }
+                    if (goblin.getHealth() <= 0) {
+                        gameGrid[goblin.getVPos()][goblin.getHPos()] = '-';
+                        goblins.remove(goblin);
+                    }
                 }
                 else {
                     gameGrid[human.getVPos()][human.getHPos()] = '-';
@@ -77,8 +157,6 @@ public class Land {
                     gameGrid[human.getVPos()][human.getHPos()] = human;
                 }
                 break;
-            default:
-                System.out.println("Invalid input please try again");
         }
     }
 
@@ -94,6 +172,7 @@ public class Land {
     }
 
     public void moveGoblins() {
+        Object nextPosition;
         for (Goblin goblin : goblins) {
             int move = random.nextInt(4);
             //Current position of this goblin changed to - (Dash)
@@ -103,7 +182,25 @@ public class Land {
                 case 0:
                     if (goblin.getVPos() == 0) {
                         break;
-                    } else {
+                    }
+                    else {
+                        nextPosition = gameGrid[goblin.getVPos() - 1][human.getHPos()];
+                    }
+
+                    if (nextPosition.getClass().getName().equals("Human")) {
+                        if (Math.random() < 0.5) {
+                            human.attack(goblin);
+                            System.out.println("Human attacks goblin for" + human.getStrength() + "damage");
+                        } else {
+                            goblin.attack(human);
+                            System.out.println("Goblin attacks human for" + goblin.getStrength() + "damage");
+                        }
+                        if (human.getHealth() <= 0) {
+                            gameGrid[human.getVPos()][human.getHPos()] = '-';
+                            System.out.println("You lose!");
+                        }
+                    }
+                    else {
                         gameGrid[goblin.getVPos()][goblin.getHPos()] = '-';
                         goblin.setVPos(goblin.getVPos() - 1);
                         gameGrid[goblin.getVPos()][goblin.getHPos()] = goblin;
@@ -112,6 +209,23 @@ public class Land {
                 case 1:
                     if (goblin.getHPos() == 0) {
                         break;
+                    }
+                    else {
+                        nextPosition = gameGrid[goblin.getVPos()][goblin.getHPos() - 1];
+                    }
+
+                    if (nextPosition.getClass().getName().equals("Human")) {
+                        if (Math.random() < 0.5) {
+                            human.attack(goblin);
+                            System.out.println("Human attacks goblin for" + human.getStrength() + "damage");
+                        } else {
+                            goblin.attack(human);
+                            System.out.println("Goblin attacks human for" + goblin.getStrength() + "damage");
+                        }
+                        if (human.getHealth() <= 0) {
+                            gameGrid[human.getVPos()][human.getHPos()] = '-';
+                            System.out.println("You lose!");
+                        }
                     }
                     else {
                         gameGrid[goblin.getVPos()][goblin.getHPos()] = '-';
@@ -124,6 +238,23 @@ public class Land {
                         break;
                     }
                     else {
+                        nextPosition = gameGrid[goblin.getVPos() + 1][goblin.getHPos()];
+                    }
+
+                    if (nextPosition.getClass().getName().equals("Human")) {
+                        if (Math.random() < 0.5) {
+                            human.attack(goblin);
+                            System.out.println("Human attacks goblin for" + human.getStrength() + "damage");
+                        } else {
+                            goblin.attack(human);
+                            System.out.println("Goblin attacks human for" + goblin.getStrength() + "damage");
+                        }
+                        if (human.getHealth() <= 0) {
+                            gameGrid[human.getVPos()][human.getHPos()] = '-';
+                            System.out.println("You lose!");
+                        }
+                    }
+                    else {
                         gameGrid[goblin.getVPos()][goblin.getHPos()] = '-';
                         goblin.setVPos(goblin.getVPos() + 1);
                         gameGrid[goblin.getVPos()][goblin.getHPos()] = goblin;
@@ -132,6 +263,22 @@ public class Land {
                 case 3:
                     if (goblin.getHPos() == this.length - 1) {
                         break;
+                    }
+                    else {
+                        nextPosition = gameGrid[goblin.getVPos()][goblin.getHPos() + 1];
+                    }
+                    if (nextPosition.getClass().getName().equals("Human")) {
+                        if (Math.random() < 0.5) {
+                            human.attack(goblin);
+                            System.out.println("Human attacks goblin for" + human.getStrength() + "damage");
+                        } else {
+                            goblin.attack(human);
+                            System.out.println("Goblin attacks human for" + goblin.getStrength() + "damage");
+                        }
+                        if (human.getHealth() <= 0) {
+                            gameGrid[human.getVPos()][human.getHPos()] = '-';
+                            System.out.println("You lose!");
+                        }
                     }
                     else {
                         gameGrid[goblin.getVPos()][goblin.getHPos()] = '-';
