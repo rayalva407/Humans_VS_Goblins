@@ -187,6 +187,7 @@ public class Land {
                         nextPosition = gameGrid[goblin.getVPos() - 1][human.getHPos()];
                     }
 
+                    if (nextPosition.getClass().getName().equals("Goblin")) break;
                     if (nextPosition.getClass().getName().equals("Human")) {
                         if (Math.random() < 0.5) {
                             human.attack(goblin);
@@ -214,6 +215,7 @@ public class Land {
                         nextPosition = gameGrid[goblin.getVPos()][goblin.getHPos() - 1];
                     }
 
+                    if (nextPosition.getClass().getName().equals("Goblin")) break;
                     if (nextPosition.getClass().getName().equals("Human")) {
                         if (Math.random() < 0.5) {
                             human.attack(goblin);
@@ -241,6 +243,7 @@ public class Land {
                         nextPosition = gameGrid[goblin.getVPos() + 1][goblin.getHPos()];
                     }
 
+                    if (nextPosition.getClass().getName().equals("Goblin")) break;
                     if (nextPosition.getClass().getName().equals("Human")) {
                         if (Math.random() < 0.5) {
                             human.attack(goblin);
@@ -267,6 +270,8 @@ public class Land {
                     else {
                         nextPosition = gameGrid[goblin.getVPos()][goblin.getHPos() + 1];
                     }
+
+                    if (nextPosition.getClass().getName().equals("Goblin")) break;
                     if (nextPosition.getClass().getName().equals("Human")) {
                         if (Math.random() < 0.5) {
                             human.attack(goblin);
