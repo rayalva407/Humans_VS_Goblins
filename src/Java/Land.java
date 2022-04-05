@@ -198,7 +198,6 @@ public class Land {
                         }
                         if (human.getHealth() <= 0) {
                             gameGrid[human.getVPos()][human.getHPos()] = '-';
-                            System.out.println("You lose!");
                         }
                     }
                     else {
@@ -226,7 +225,6 @@ public class Land {
                         }
                         if (human.getHealth() <= 0) {
                             gameGrid[human.getVPos()][human.getHPos()] = '-';
-                            System.out.println("You lose!");
                         }
                     }
                     else {
@@ -254,7 +252,6 @@ public class Land {
                         }
                         if (human.getHealth() <= 0) {
                             gameGrid[human.getVPos()][human.getHPos()] = '-';
-                            System.out.println("You lose!");
                         }
                     }
                     else {
@@ -282,7 +279,6 @@ public class Land {
                         }
                         if (human.getHealth() <= 0) {
                             gameGrid[human.getVPos()][human.getHPos()] = '-';
-                            System.out.println("You lose!");
                         }
                     }
                     else {
